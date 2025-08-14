@@ -1,0 +1,10 @@
+import SpotifyAPI from '../../services/api/SpotifyAPI';
+
+async function fetchProfile() {
+    try {
+        const profile = await SpotifyAPI.getMe();
+        console.log(profile);
+    } catch (e) {
+        console.error(e);
+    }
+}
