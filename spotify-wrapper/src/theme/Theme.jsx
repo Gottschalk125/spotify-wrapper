@@ -1,5 +1,6 @@
 import React from 'react';
 import SpotifyAPI from "../services/api/SpotifyAPI";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const coverUrl = 'https://via.placeholder.com/300'; // Replace with actual cover URL
 
@@ -67,10 +68,18 @@ function PlayerControlFuncs() {
                     }}
                 />
                 <div style={{ display: 'flex', gap: '24px' }}>
-                    <button onClick={handlePrevious}>⏮️</button>
-                    <button onClick={handlePlay}>▶️</button>
-                    <button onClick={handlePause}>⏸️</button>
-                    <button onClick={handleNext}>⏭️</button>
+                    <button onClick={handlePrevious}>
+                        <i className="bi bi-skip-start-fill"></i>
+                    </button>
+                    <button onClick={handlePlay}>
+                        <i className="bi bi-play-fill"></i>
+                    </button>
+                    <button onClick={handlePause}>
+                        <i className="bi bi-pause-fill"></i>
+                    </button>
+                    <button onClick={handleNext}>
+                        <i className="bi bi-skip-end-fill"></i>
+                    </button>
                 </div>
             </div>
         </div>

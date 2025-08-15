@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import SpotifyAPI from "../../services/api/SpotifyAPI";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function PlayerControl() {
     const [track, setTrack] = useState(null);
 
+    useEffect(() => {
+        async function fetchTrack() {
+            try {
+                const data = await SpotifyAPI.getCurrentlyPlaying();
+                setTrack(data?.item);
+            } catch (e) {
+                console.error('Fetch track error:', e);
+            }
+        }
+        fetchTrack();
+    }, []);
     useEffect(() => {
         async function fetchTrack() {
             try {
@@ -70,23 +82,25 @@ function PlayerControl() {
                 <img
                     src={track?.album?.images?.[0]?.url || 'https://via.placeholder.com/300'}
                     alt="Song Cover"
-                    style={{
-                        width: '300px',
-                        height: '300px',
-                        borderRadius: '24px',
-                        marginBottom: '32px',
-                        boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
-                    }}
+                    style={{ width: '300px', height: '300px', borderRadius: '24px' }}
                 />
                 <h2 style={{ color: '#fff', margin: 0 }}>{track?.name || 'No song playing'}</h2>
                 <p style={{ color: '#eee', marginBottom: '32px' }}>
                     {track?.artists?.map(a => a.name).join(', ') || ''}
                 </p>
                 <div style={{ display: 'flex', gap: '24px' }}>
-                    <button onClick={handlePrevious}>⏮️</button>
-                    <button onClick={handlePlay}>▶️</button>
-                    <button onClick={handlePause}>⏸️</button>
-                    <button onClick={handleNext}>⏭️</button>
+                    <button onClick={handlePrevious}>
+                        <i className="bi bi-skip-start-fill"></i>
+                    </button>
+                    <button onClick={handlePlay}>
+                        <i className="bi bi-play-fill"></i>
+                    </button>
+                    <button onClick={handlePause}>
+                        <i className="bi bi-pause-fill"></i>
+                    </button>
+                    <button onClick={handleNext}>
+                        <i className="bi bi-skip-end-fill"></i>
+                    </button>
                 </div>
             </div>
         </div>
