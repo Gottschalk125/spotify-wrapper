@@ -5,7 +5,7 @@ function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
-function Callback() {
+/*function Callback() {
     const query = useQuery();
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ function Callback() {
                 if (response.ok) {
                     localStorage.setItem('spotify_access_token', data.access_token);
                     localStorage.setItem('spotify_refresh_token', data.refresh_token);
-                    navigate('/dashboard');
+                    navigate('/');
                 } else {
                     throw new Error('Token exchange failed');
                 }
@@ -57,6 +57,36 @@ function Callback() {
             <p>Processing login...</p>
         </div>
     );
+}*/
+
+// In src/pages/auth/CallbackLogin.jsx
+//import React, { useEffect } from 'react';
+//import { useNavigate } from 'react-router-dom';
+
+function Callback() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        const accessToken = params.get('access_token');
+
+        if (accessToken) {
+            localStorage.setItem('spotify_access_token', accessToken);
+            navigate('/');
+        } else {
+            navigate('/login');
+        }
+    }, [navigate]);
+
+    return (
+        <div>
+            <h2>Spotify Callback</h2>
+            <p>Processing login...</p>
+        </div>
+    );
 }
 
 export default Callback;
+
+

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-const RESPONSE_TYPE = 'code';
+const RESPONSE_TYPE = 'token';
 const SCOPES = [
     'user-read-playback-state',
     'user-modify-playback-state',

@@ -16,17 +16,6 @@ function PlayerControl() {
         }
         fetchTrack();
     }, []);
-    useEffect(() => {
-        async function fetchTrack() {
-            try {
-                const data = await SpotifyAPI.getCurrentlyPlaying();
-                setTrack(data?.item);
-            } catch (e) {
-                console.error('Fetch track error:', e);
-            }
-        }
-        fetchTrack();
-    }, []);
 
     const handlePlay = async () => {
         try {
